@@ -6,7 +6,7 @@ import json
 import dateutil.parser
 import babel
 import sys
-from flask import Flask, render_template, request, Response, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_moment import Moment
 from flask_migrate import Migrate
 import logging
@@ -278,7 +278,10 @@ def create_venue_submission():
         db.session.add(venue)
         db.session.commit()
         flash("Venue " + request.form["name"] + " was successfully listed!")
-    except:
+    except Exception as e:
+        print(e)
+        print(f"form error:{form.errors}")
+        print(sys.exc_info())
         db.session.rollback()
         if form.errors:
             flash(form.errors)

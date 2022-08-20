@@ -1,3 +1,5 @@
 node_modules
 env
 migrationsEx
+migrations
+__pycache__
